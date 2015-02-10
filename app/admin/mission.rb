@@ -1,4 +1,5 @@
 ActiveAdmin.register Mission do
+  permit_params :class_name, :class_code, :variables
 
 
   # See permitted parameters documentation:
