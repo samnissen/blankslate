@@ -1,5 +1,6 @@
-<h1>New interface</h1>
+<%- model_class = Interface -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => Interface %></h1>
+</div>
+<%= render :partial => 'form' %>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', interfaces_path %>
