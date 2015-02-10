@@ -1,4 +1,5 @@
 ActiveAdmin.register TaskType do
+  permit_params :name, :setup, :teardown
 
 
   # See permitted parameters documentation:
