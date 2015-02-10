@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/gregbell/active_admin.git
+  remote: https://github.com/activeadmin/activeadmin.git
   revision: 2fd42a3502fea1e2b9d523aff5acaf2a1576d19f
   specs:
     activeadmin (1.0.0.pre)
@@ -17,7 +17,7 @@ GIT
       sass-rails
 
 GIT
-  remote: git://github.com/plataformatec/devise.git
+  remote: https://github.com/plataformatec/devise.git
   revision: a2e0e9c187dd58618e234c2a790d6723d5792e74
   specs:
     devise (3.4.1)
@@ -29,7 +29,7 @@ GIT
       warden (~> 1.2.3)
 
 GIT
-  remote: git://github.com/twbs/bootstrap-sass.git
+  remote: https://github.com/twbs/bootstrap-sass.git
   revision: a9f5a22675c179b4f5be8412c675094b02b7ecfa
   specs:
     bootstrap-sass (3.3.3)
@@ -166,6 +166,7 @@ GEM
     multi_test (0.1.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    mysql2 (0.3.17)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     oauth2 (1.0.0)
@@ -512,6 +513,7 @@ DEPENDENCIES
   factory_girl_rails
   jbuilder (~> 2.0)
   jquery-rails
+  mysql2
   omniauth
   omniauth-facebook
   rails (= 4.1.4)

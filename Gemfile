@@ -51,13 +51,13 @@ group :test do
   gem 'database_cleaner'
 end
 
-gem 'bootstrap-sass', github: 'twbs/bootstrap-sass'
+gem 'bootstrap-sass', git: "https://github.com/twbs/bootstrap-sass.git" #, github: 'twbs/bootstrap-sass'
 gem 'bootstrap-sass-extras'
 gem 'simple_form'
 gem 'binding_of_caller'
 gem 'delayed_job_active_record'
-gem 'activeadmin', github: 'gregbell/active_admin'
-gem 'devise', github: 'plataformatec/devise'
+gem 'activeadmin', git: "https://github.com/activeadmin/activeadmin.git" #, github: 'gregbell/active_admin'
+gem 'devise', git: "https://github.com/plataformatec/devise.git" #, github: 'plataformatec/devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'validates_formatting_of'
@@ -66,3 +66,5 @@ gem 'tzinfo-data'
 group :development do
   gem 'better_errors'
 end
+
+gem 'mysql2'
