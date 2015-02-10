@@ -1,33 +1,42 @@
-<h1>Listing tasks</h1>
-
-<table>
+<%- model_class = Task -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Task %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Code</th>
-      <th>Variables</th>
-      <th>Task type</th>
-      <th colspan="3"></th>
+      <th>ID</th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:code) %></th>
+      <th><%= model_class.human_attribute_name(:variables) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
+        <td><%= task.id %></td>
         <td><%= task.name %></td>
         <td><%= task.description %></td>
         <td><%= task.code %></td>
         <td><%= task.variables %></td>
-        <td><%= task.task_type %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l task.created_at, format: :long %></td>
+        <td>
+          <%= link_to task_path(task), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to task_path(task), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Task', new_task_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_task_path,
+            :class => 'btn btn-primary' %>
