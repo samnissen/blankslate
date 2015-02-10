@@ -1,0 +1,28 @@
+<%= form_for @mission, :html => { :class => 'form-horizontal form-model' } do |f| %>
+  <div class="form-group">
+    <%= f.label :class_name, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :class_name, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :class_code, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :class_code, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :variables, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :variables, :class => 'text-field form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class='col-md-offset-2 col-md-10'>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  missions_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+<% end %>
