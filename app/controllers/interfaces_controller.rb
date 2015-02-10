@@ -29,6 +29,7 @@ class InterfacesController < ApplicationController
   # POST /interfaces.json
   def create
     @interface = Interface.new(interface_params)
+    @interface.user = current_user
 
     respond_to do |format|
       if @interface.save
