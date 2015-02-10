@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'jobs/index'
+
   resources :task_types
 
   resources :tasks
