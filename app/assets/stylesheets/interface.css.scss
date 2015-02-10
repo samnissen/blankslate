@@ -1,0 +1,13 @@
+// Place all the styles related to the Interface controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.subindex {
+	margin: 1em 0 2em;
+	padding: 1em;
+	border: 1px solid #ddd;
+	border-radius: 7px;
+}
+.subindex > h2 {
+	margin: 0.1em 0 0.3em;
+}

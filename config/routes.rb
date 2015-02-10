@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  get 'jobs/index'
+  get 'interfaces/index'
 
-  resources :task_types
+  resources :task_types do
+    resources :tasks
+  end
 
-  resources :tasks
-
-  resources :interfaces
-
-  resources :missions
+  resources :interfaces do
+    resources :missions
+  end
 
   devise_for :users, controllers: {registrations: "users/registrations", sessions: "users/sessions", passwords: "users/passwords"}, skip: [:sessions, :registrations]
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'jobs#index'
+  root 'interfaces#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

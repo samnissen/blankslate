@@ -37,3 +37,42 @@
 .form-user {
   max-width: 450px;
 }
+
+#body-section {
+	width:100%;
+	background-color: white;
+	padding: 2em 1em;
+}
+
+#container {
+	max-width: 1000px;
+	//background-color: #e4d4df;
+}
+
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
+.navbar-header .navbar-brand {
+	color: #cc445e;
+}
+
+.page-header {
+	margin-top: 0;
+}
+
+footer {
+	color: #777;
+	padding: 2em 1em;
+}
+
+.btn-danger {
+	color: white;
+	background-color: #6C0B07;
+	border-color: #6C2A28;
+	transition: background-color 1000ms linear;
+	//background-color: #B91FA9;
+	//border-color: #C32061;
+	//background-color: #d9534f;
+	//border-color: #d43f3a;
+}

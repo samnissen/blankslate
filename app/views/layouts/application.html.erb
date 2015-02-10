@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Blankslate</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-<meta name="viewport" content="width=device-width, initial-scale=1"/></head>
+	<title>Blankslate</title>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+
 <body>
-<%= render partial: "elements/navbar" %>
-<%= bootstrap_flash %>
 
+	<%= render partial: "elements/navbar" %>
 
-<%= yield %>
+	<div id="body-section">
+		<div id="container">
+			<%= bootstrap_flash %>
+			<%= yield %>
+		</div>
+	</div>
+
+	<footer>
+		<h6>Have a nice day!</h6>
+	</footer>
 
 </body>
 </html>

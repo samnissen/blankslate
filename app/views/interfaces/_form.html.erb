@@ -1,14 +1,14 @@
 <%= form_for @interface, :html => { :class => 'form-horizontal form-model' } do |f| %>
-  <div class="form-group">
-    <%= f.label :address, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :address, :class => 'text-field form-control' %>
+  <div class="form-group hide">
+    <%= f.label :address, :class => 'control-label col-md-2 hide' %>
+    <div class="col-md-10 hide">
+      <%= f.text_field :address, :class => 'text-field form-control hide' %>
     </div>
   </div>
-  <div class="form-group">
-    <%= f.label :credentials, :class => 'control-label col-md-2' %>
+  <div class="form-group hide">
+    <%= f.label :credentials, :class => 'control-label col-md-2 hide' %>
     <div class="col-md-10">
-      <%= f.text_field :credentials, :class => 'text-field form-control' %>
+      <%= f.text_field :credentials, :class => 'text-field form-control hide' %>
     </div>
   </div>
 

@@ -1,10 +1,11 @@
 class InterfacesController < ApplicationController
-
+  
   #->Prelang (scaffolding:rails/scope_to_user)
+  before_filter :authenticate_user!, only: [:index]
   before_filter :require_user_signed_in, only: [:new, :edit, :create, :update, :destroy]
-
+  
   before_action :set_interface, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /interfaces
   # GET /interfaces.json
   def index
@@ -15,7 +16,7 @@ class InterfacesController < ApplicationController
   # GET /interfaces/1.json
   def show
   end
-
+  
   # GET /interfaces/new
   def new
     @interface = Interface.new
@@ -70,10 +71,16 @@ class InterfacesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_interface
       @interface = Interface.find(params[:id])
+      @missions = Mission.where(interface: @interface)
+      redirect to interfaces_path and return unless is_users?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def interface_params
       params.require(:interface).permit(:address, :credentials, :user_id)
+    end
+    
+    def is_users?
+      @interface.user == current_user
     end
 end

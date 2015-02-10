@@ -67,4 +67,10 @@ group :development do
   gem 'better_errors'
 end
 
+# Use MYSQL as the database for Active Record
 gem 'mysql2'
+
+
+
+
+# :]

@@ -1,14 +1,15 @@
 class MissionsController < ApplicationController
 
   #->Prelang (scaffolding:rails/scope_to_user)
+  before_filter :authenticate_user!, only: [:index]
   before_filter :require_user_signed_in, only: [:new, :edit, :create, :update, :destroy]
-
+  
   before_action :set_mission, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /missions
   # GET /missions.json
   def index
-    @missions = Mission.all
+    @missions = Mission.where(user: current_user)
   end
 
   # GET /missions/1
@@ -70,10 +71,15 @@ class MissionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_mission
       @mission = Mission.find(params[:id])
+      redirect to interfaces_path and return unless is_users?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mission_params
       params.require(:mission).permit(:user_id, :class_name, :class_code, :variables, :interface_id)
+    end
+    
+    def is_users?
+      @mission.user == current_user
     end
 end

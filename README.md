@@ -1,4 +1,4 @@
-# blank-slate
+# blankslate
 
 A complete system of creating automated task interfaces.
 
@@ -15,8 +15,6 @@ TODO: TBD
 ### Example 
 
 TODO: TBD
-
-### Example using watir-webdriver
 
 ## Contributing
 
