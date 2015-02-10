@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @interface.address %>
+</p>
+
+<p>
+  <strong>Credentials:</strong>
+  <%= @interface.credentials %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @interface.user %>
+</p>
+
+<%= link_to 'Edit', edit_interface_path(@interface) %> |
+<%= link_to 'Back', interfaces_path %>
