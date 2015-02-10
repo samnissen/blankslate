@@ -1,4 +1,5 @@
 ActiveAdmin.register Task do
+  permit_params :name, :description, :code, :variables
 
 
   # See permitted parameters documentation:
