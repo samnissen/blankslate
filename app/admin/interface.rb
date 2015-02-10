@@ -1,4 +1,5 @@
 ActiveAdmin.register Interface do
+  permit_params :address, :credentials
 
 
   # See permitted parameters documentation:
