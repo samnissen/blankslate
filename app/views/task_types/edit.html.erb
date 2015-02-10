@@ -1,6 +1,5 @@
-<h1>Editing task_type</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @task_type %> |
-<%= link_to 'Back', task_types_path %>
+<%- model_class = TaskType -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => TaskType %></h1>
+</div>
+<%= render :partial => 'form' %>
