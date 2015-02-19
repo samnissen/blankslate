@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :formulas
+
+  resources :variables
+
   get 'interfaces/index'
 
   resources :task_types do

@@ -11,27 +11,41 @@
 	  <thead>
 	    <tr>
 	      <th>ID</th>
-	      <th><%= model_class.human_attribute_name(:class_name) %></th>
-	      <th><%= model_class.human_attribute_name(:class_code) %></th>
+	      <th><%= model_class.human_attribute_name(:formula_id) %></th>
 	      <th><%= model_class.human_attribute_name(:variables) %></th>
 	      <th><%= model_class.human_attribute_name(:created_at) %></th>
 	      <th><%=t '.actions', :default => t("helpers.actions") %></th>
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <% @missions.each do |mission| %>
+	    <% @interface.missions.each do |mission| %>
 	      <tr>
 	        <td><%= mission.id %></td>
-	        <td><%= mission.class_name %></td>
-	        <td><%= mission.class_code %></td>
-	        <td><%= mission.variables %></td>
+	        <td><%= mission.formula.name %></td>
+	        <td>
+						<table class="missions_variables_table">
+							<thead>
+								<th>name</th>
+								<th>value</th>
+							</thead>
+							<tbody>
+								<% JSON.parse(mission.variables || "{}").each do |k,v| %>
+								<tr>
+									<td><%= "#{k}" %></td>
+									<td><%= "#{v}" %></td>
+								</tr>
+								<% end %>
+							</tbody>
+						</table>
+					</ul>
+					</td>
 	        <td><%=l mission.created_at, format: :long %></td>
 	        <td>
-	          <%= link_to interface_mission_path(mission), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+	          <%= link_to interface_mission_path(@interface, mission), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
 	            <%= glyph 'info-sign' %>
 	            <%= glyph 'pencil' %>
 	          <%- end -%>
-	          <%= link_to interface_mission_path(mission), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+	          <%= link_to interface_mission_path(@interface, mission), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
 	            <%= glyph 'remove' %>
 	          <%- end -%>
 	        </td>

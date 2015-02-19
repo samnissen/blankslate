@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @formula.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @formula.description %>
+</p>
+
+<p>
+  <strong>Task:</strong>
+  <%= @formula.task %>
+</p>
+
+<%= link_to 'Edit', edit_formula_path(@formula) %> |
+<%= link_to 'Back', formulas_path %>

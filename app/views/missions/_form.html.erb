@@ -1,28 +1,110 @@
-<%= form_for @mission, :html => { :class => 'form-horizontal form-model' } do |f| %>
-  <div class="form-group">
-    <%= f.label :class_name, :class => 'control-label col-md-2' %>
+<%= form_for [@interface, @mission], :html => { :class => 'form-horizontal form-model' } do |f| %>
+		<div class="form-group">
+			<label class="control-label col-md-2" for="mission_action">Formula:</label>
+			<div class="col-md-10">
+				<select class="select-list form-control" id="formula-selector" name="formula_id">
+					<option value="" disabled="disabled" selected="selected">Please select a formula</option>
+					<% @formulas.each do |fml| %>
+						<option id="formula-option-<%= fml.id %>" value="<%= fml.id %>"><%= fml.name.humanize %></option>
+					<% end %>
+				</select>
+			</div>
+		</div>
+		
+		
+		<fieldset class="variables">
+			<div class="form-group">
+				<label class="control-label col-md-2" for="mission_variables"> </label>
+				<div class="col-md-10">
+					<h4>Variables</h4>
+				</div>
+			</div>
+		
+			<% @variables_for_input.each do |name, variable_array| %>
+				<div class="form-group variable-subsection" id="form-group-formula-0">
+					<label class="control-label col-md-2" for="mission_variables"> </label>
+					<div class="col-md-10">
+						<em>(Please select a formula above.)</em>
+					</div>
+				</div>
+				<div class="form-group variable-subsection hide" id="form-group-formula-<%= name %>">
+					<% variable_array.each do |variable| %>
+						<label class="control-label col-md-2" for="mission_variables"> </label>
+			
+						<div class="col-md-10">
+							<h6><%= variable.prompt.humanize %></h6>
+							
+							<% case variable.validation_type %>
+							<% when 'select_list'%>
+								<select class="select-list form-control"  name="mission[variable_<%= variable.id %>]" id="mission_variable_<%= variable.id %>">
+									<% "#{variable.validation}".split(",").each do |vv| %>
+										<% opt = vv.strip %>
+										<option id="variable-option-<%= opt %>" value="<%= opt %>"><%= opt %></option>
+									<% end %>
+								</select>
+							
+							<% when 'boolean'%>
+								<input class="radio-button form-control" type="radio" value="true" id="mission_variable_<%= variable.id %>_true" name="mission[variable_<%= variable.id %>]" type="text" />
+								<input class="radio-button form-control" type="radio" value="true" id="mission_variable_<%= variable.id %>_false" name="mission[variable_<%= variable.id %>]" type="text" />
+							
+							<% when 'url' %>
+								<input class="text-field form-control" type="url id="mission_variable_<%= variable.id %>" name="mission[variable_<%= variable.id %>]" type="text" />
+							
+							<% when 'text_field' %>
+								<input class="text-field form-control" id="mission_variable_<%= variable.id %>" name="mission[variable_<%= variable.id %>]" type="text" />
+							<% end %>
+							
+						</div>
+					<% end %>
+				</div>
+			<% end %>
+		</fieldset>
+		
+	
+	<!-- 
+		js-load the selected formula 
+		pull the variables required 
+		prompt user for var values 
+		JSON variables into 1 string 
+	-->
+	
+	<script>
+		$(document).ready(function() {
+			$('.variable-subsection').hide();
+			$('#form-group-formula-0').show();
+			
+			$('#formula-selector').on('change', function() {
+				$('#form-group-formula-0').hide();
+				
+			  var selected_formula_id = $('#formula-selector').find(":selected").attr('id');
+				
+				// parse ID number from word-word-123
+				var formula_id_number = selected_formula_id.split('-')[(selected_formula_id.split('-').length - 1)]
+				
+				$("#form-group-formula-" + formula_id_number).removeClass('hide').show();
+			});
+		
+		});
+	</script>
+	
+	<div class="form-group">
+    <%= f.label :recurring, :class => 'control-label col-md-2' %>
     <div class="col-md-10">
-      <%= f.text_field :class_name, :class => 'text-field form-control' %>
+      <%= f.check_box :recurring, :class => 'check-box form-control' %> 
     </div>
   </div>
-  <div class="form-group">
-    <%= f.label :class_code, :class => 'control-label col-md-2' %>
+	<div class="form-group">
+    <%= f.label :interval, :class => 'control-label col-md-2' %>
     <div class="col-md-10">
-      <%= f.text_field :class_code, :class => 'text-field form-control' %>
+      <%= f.text_field :interval, :class => 'text-field form-control' %>
     </div>
   </div>
-  <div class="form-group">
-    <%= f.label :variables, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :variables, :class => 'text-field form-control' %>
-    </div>
-  </div>
-
-  <div class="form-group">
+	
+	<div class="form-group">
     <div class='col-md-offset-2 col-md-10'>
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  missions_path, :class => 'btn btn-default' %>
+                  interface_path(@interface), :class => 'btn btn-default' %>
     </div>
   </div>
 <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150210072304) do
+ActiveRecord::Schema.define(version: 20150219085605) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -62,6 +62,21 @@ ActiveRecord::Schema.define(version: 20150210072304) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
+  create_table "formulas", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "formulas_tasks", id: false, force: true do |t|
+    t.integer "formula_id"
+    t.integer "task_id"
+  end
+
+  add_index "formulas_tasks", ["formula_id"], name: "index_formulas_tasks_on_formula_id", using: :btree
+  add_index "formulas_tasks", ["task_id"], name: "index_formulas_tasks_on_task_id", using: :btree
+
   create_table "interfaces", force: true do |t|
     t.string   "address"
     t.string   "credentials"
@@ -75,13 +90,17 @@ ActiveRecord::Schema.define(version: 20150210072304) do
   create_table "missions", force: true do |t|
     t.integer  "user_id"
     t.string   "class_name"
-    t.string   "class_code"
-    t.string   "variables"
+    t.text     "class_code",   limit: 16777215
+    t.text     "variables",    limit: 16777215
     t.integer  "interface_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "interval"
+    t.boolean  "recurring"
+    t.integer  "formula_id"
   end
 
+  add_index "missions", ["formula_id"], name: "index_missions_on_formula_id", using: :btree
   add_index "missions", ["interface_id"], name: "index_missions_on_interface_id", using: :btree
   add_index "missions", ["user_id"], name: "index_missions_on_user_id", using: :btree
 
@@ -97,12 +116,14 @@ ActiveRecord::Schema.define(version: 20150210072304) do
     t.string   "name"
     t.string   "description"
     t.text     "code"
-    t.text     "variables"
     t.integer  "task_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "formula_id"
+    t.string   "return_value"
   end
 
+  add_index "tasks", ["formula_id"], name: "index_tasks_on_formula_id", using: :btree
   add_index "tasks", ["task_type_id"], name: "index_tasks_on_task_type_id", using: :btree
 
   create_table "users", force: true do |t|
@@ -122,5 +143,19 @@ ActiveRecord::Schema.define(version: 20150210072304) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "variables", force: true do |t|
+    t.string   "prompt"
+    t.string   "name"
+    t.string   "validation_type"
+    t.string   "validation"
+    t.integer  "task_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "task_type_id"
+  end
+
+  add_index "variables", ["task_id"], name: "index_variables_on_task_id", using: :btree
+  add_index "variables", ["task_type_id"], name: "index_variables_on_task_type_id", using: :btree
 
 end

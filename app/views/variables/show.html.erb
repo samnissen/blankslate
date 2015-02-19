@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Prompt:</strong>
+  <%= @variable.prompt %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @variable.name %>
+</p>
+
+<p>
+  <strong>Validation type:</strong>
+  <%= @variable.validation_type %>
+</p>
+
+<p>
+  <strong>Validation:</strong>
+  <%= @variable.validation %>
+</p>
+
+<p>
+  <strong>Task:</strong>
+  <%= @variable.task %>
+</p>
+
+<%= link_to 'Edit', edit_variable_path(@variable) %> |
+<%= link_to 'Back', variables_path %>

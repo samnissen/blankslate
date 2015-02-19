@@ -72,7 +72,7 @@ class InterfacesController < ApplicationController
     def set_interface
       @interface = Interface.find(params[:id])
       @missions = Mission.where(interface: @interface)
-      redirect to interfaces_path and return unless is_users?
+      redirect_to interfaces_path and return unless is_users?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

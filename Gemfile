@@ -70,6 +70,13 @@ end
 # Use MYSQL as the database for Active Record
 gem 'mysql2'
 
+# Gems for executing tasks
+gem 'os'
+gem 'watir-webdriver'
+gem 'headless'
+
+
+
 
 
 
